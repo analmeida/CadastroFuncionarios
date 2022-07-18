@@ -1,6 +1,7 @@
 ﻿using Funcionarios.Models.Contracts.Contexts;
 using Funcionarios.Models.Contracts.Repositories;
 using Funcionarios.Models.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +25,9 @@ namespace Funcionarios.Models.Repositories
 
         public void Cadastrar(FuncionarioDto funcionario)
         {
+            funcionario.CPF = Convert.ToUInt64(funcionario.CPF).ToString(@"000\.000\.000\-00");
+            funcionario.RG = Convert.ToUInt64(funcionario.RG).ToString(@"00\.000\.000\-0");
+           
             _contextData.CadastrarFuncionario(funcionario);
         }
 
