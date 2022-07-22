@@ -37,7 +37,7 @@ namespace Funcionarios.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia, FuncAtivo")]FuncionarioDto funcionario)
+        public IActionResult Create([Bind("Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, FuncAtivo, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia")]FuncionarioDto funcionario)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace Funcionarios.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia, FuncAtivo")] FuncionarioDto funcionario)
+        public IActionResult Edit([Bind("Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, FuncAtivo, IdFunc, IdDados, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia")] FuncionarioDto funcionario)
         {
             if (string.IsNullOrEmpty(funcionario.Id))
                 return NotFound();
@@ -100,6 +100,7 @@ namespace Funcionarios.Controllers
                 return NotFound();
 
             var funcionario = _funcionarioService.PesquisarId(id);
+       
             if (funcionario == null)
                 return NotFound();
 
@@ -107,9 +108,10 @@ namespace Funcionarios.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete([Bind("Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia, FuncAtivo")] FuncionarioDto funcionario)
-        {
-                _funcionarioService.Excluir(funcionario.Id);
+        public IActionResult Delete([Bind("Id, IdFunc")] FuncionarioDto funcionario)
+        {            
+                if(funcionario.Gestor == null || funcionario.Gestor == true || funcionario.Gestor == false?  false:true)
+                _funcionarioService.Excluir(funcionario);
                 return RedirectToAction("List");            
 
         }

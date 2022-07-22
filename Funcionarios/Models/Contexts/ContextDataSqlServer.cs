@@ -35,16 +35,26 @@ namespace Funcionarios.Models.Contexts
                 command.Parameters.Add("@TituloEleitor", System.Data.SqlDbType.VarChar).Value = funcionario.TituloEleitor;
                 command.Parameters.Add("@CNH", System.Data.SqlDbType.VarChar).Value = funcionario.CNH;
                 command.Parameters.Add("@Gestor", System.Data.SqlDbType.Bit).Value = funcionario.Gestor;
-                command.Parameters.Add("@CEP", System.Data.SqlDbType.VarChar).Value = funcionario.CEP;
-                command.Parameters.Add("@Endereco", System.Data.SqlDbType.VarChar).Value = funcionario.Endereco;
-                command.Parameters.Add("@Numero", System.Data.SqlDbType.VarChar).Value = funcionario.Numero;
-                command.Parameters.Add("@Complemento", System.Data.SqlDbType.VarChar).Value = funcionario.Complemento;
-                command.Parameters.Add("@Bairro", System.Data.SqlDbType.VarChar).Value = funcionario.Bairro;
-                command.Parameters.Add("@Cidade", System.Data.SqlDbType.VarChar).Value = funcionario.Cidade;
-                command.Parameters.Add("@Estado", System.Data.SqlDbType.VarChar).Value = funcionario.Estado;
-                command.Parameters.Add("@PontoReferencia", System.Data.SqlDbType.VarChar).Value = funcionario.PontoReferencia;
                 command.Parameters.Add("@FuncAtivo", System.Data.SqlDbType.Bit).Value = funcionario.FuncAtivo;
                 command.ExecuteNonQuery();
+                if (_connection.State == System.Data.ConnectionState.Open)
+                    _connection.Close();
+
+
+                _connection.Open();
+                var query1 = SqlManager.GetSql(TSql.ATUALIZAR_FUNCIONARIO2);
+                var command1 = new SqlCommand(query1, _connection);
+                command1.Parameters.Add("@IdFunc", System.Data.SqlDbType.VarChar).Value = funcionario.IdFunc;
+                command1.Parameters.Add("@IdDados", System.Data.SqlDbType.VarChar).Value = funcionario.Id;
+                command1.Parameters.Add("@CEP", System.Data.SqlDbType.VarChar).Value = funcionario.CEP;
+                command1.Parameters.Add("@Endereco", System.Data.SqlDbType.VarChar).Value = funcionario.Endereco;
+                command1.Parameters.Add("@Numero", System.Data.SqlDbType.VarChar).Value = funcionario.Numero;
+                command1.Parameters.Add("@Complemento", System.Data.SqlDbType.VarChar).Value = funcionario.Complemento;
+                command1.Parameters.Add("@Bairro", System.Data.SqlDbType.VarChar).Value = funcionario.Bairro;
+                command1.Parameters.Add("@Cidade", System.Data.SqlDbType.VarChar).Value = funcionario.Cidade;
+                command1.Parameters.Add("@Estado", System.Data.SqlDbType.VarChar).Value = funcionario.Estado;
+                command1.Parameters.Add("@PontoReferencia", System.Data.SqlDbType.VarChar).Value = funcionario.PontoReferencia;
+                command1.ExecuteNonQuery();
 
 
             }
@@ -75,16 +85,28 @@ namespace Funcionarios.Models.Contexts
             command.Parameters.Add("@TituloEleitor", System.Data.SqlDbType.VarChar).Value = funcionario.TituloEleitor;
             command.Parameters.Add("@CNH", System.Data.SqlDbType.VarChar).Value = funcionario.CNH;
             command.Parameters.Add("@Gestor", System.Data.SqlDbType.Bit).Value = funcionario.Gestor;
-            command.Parameters.Add("@CEP", System.Data.SqlDbType.VarChar).Value = funcionario.CEP;
-            command.Parameters.Add("@Endereco", System.Data.SqlDbType.VarChar).Value = funcionario.Endereco;
-            command.Parameters.Add("@Numero", System.Data.SqlDbType.VarChar).Value = funcionario.Numero;
-            command.Parameters.Add("@Complemento", System.Data.SqlDbType.VarChar).Value = funcionario.Complemento;
-            command.Parameters.Add("@Bairro", System.Data.SqlDbType.VarChar).Value = funcionario.Bairro;
-            command.Parameters.Add("@Cidade", System.Data.SqlDbType.VarChar).Value = funcionario.Cidade;
-            command.Parameters.Add("@Estado", System.Data.SqlDbType.VarChar).Value = funcionario.Estado;
-            command.Parameters.Add("@PontoReferencia", System.Data.SqlDbType.VarChar).Value = funcionario.PontoReferencia;
             command.Parameters.Add("@FuncAtivo", System.Data.SqlDbType.Bit).Value = funcionario.FuncAtivo;
-                command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
+
+                if (_connection.State == System.Data.ConnectionState.Open)
+                    _connection.Close();
+
+
+            _connection.Open();
+            var query1 = SqlManager.GetSql(TSql.CADASTRAR_FUNCIONARIO2);           
+            var command1 = new SqlCommand(query1, _connection);
+                command1.Parameters.Add("@IdFunc", System.Data.SqlDbType.VarChar).Value = funcionario.IdFunc;
+                command1.Parameters.Add("@IdDados", System.Data.SqlDbType.VarChar).Value = funcionario.Id;
+                command1.Parameters.Add("@CEP", System.Data.SqlDbType.VarChar).Value = funcionario.CEP;
+                command1.Parameters.Add("@Endereco", System.Data.SqlDbType.VarChar).Value = funcionario.Endereco;
+                command1.Parameters.Add("@Numero", System.Data.SqlDbType.VarChar).Value = funcionario.Numero;
+                command1.Parameters.Add("@Complemento", System.Data.SqlDbType.VarChar).Value = funcionario.Complemento;
+                command1.Parameters.Add("@Bairro", System.Data.SqlDbType.VarChar).Value = funcionario.Bairro;
+                command1.Parameters.Add("@Cidade", System.Data.SqlDbType.VarChar).Value = funcionario.Cidade;
+                command1.Parameters.Add("@Estado", System.Data.SqlDbType.VarChar).Value = funcionario.Estado;
+                command1.Parameters.Add("@PontoReferencia", System.Data.SqlDbType.VarChar).Value = funcionario.PontoReferencia;
+
+                command1.ExecuteNonQuery();
                                
 
             }
@@ -99,17 +121,23 @@ namespace Funcionarios.Models.Contexts
             }
         }
 
-        public void ExcluirFuncionario(string id)
+        public void ExcluirFuncionario(FuncionarioDto funcionario)
         {
             try
             {
                 _connection.Open();
-                var query = SqlManager.GetSql(TSql.EXCLUIR_FUNCIONARIO);
-
+                var query = SqlManager.GetSql(TSql.EXCLUIR_ENDERECO);
                 var command = new SqlCommand(query, _connection);
-
-                command.Parameters.Add("@Id", System.Data.SqlDbType.VarChar).Value = id;                
+                command.Parameters.Add("@IdFunc", System.Data.SqlDbType.VarChar).Value = funcionario.IdFunc;
                 command.ExecuteNonQuery();
+                    if (_connection.State == ConnectionState.Open)
+                        _connection.Close();
+
+                _connection.Open();
+                var query1 = SqlManager.GetSql(TSql.EXCLUIR_FUNCIONARIO);
+                var command1 = new SqlCommand(query1, _connection);
+                command1.Parameters.Add("@Id", System.Data.SqlDbType.VarChar).Value = funcionario.Id;
+                command1.ExecuteNonQuery();
 
 
             }
@@ -151,17 +179,20 @@ namespace Funcionarios.Models.Contexts
                     var TituloEleitor = colunas[5].ToString();
                     var CNH = colunas[6].ToString();
                     var Gestor = (bool)colunas[7];
-                    var CEP = colunas[8].ToString();
-                    var Endereco = colunas[9].ToString();
-                    var Numero = colunas[10].ToString();
-                    var Complemento = colunas[11].ToString();
-                    var Bairro = colunas[12].ToString();
-                    var Cidade = colunas[13].ToString();
-                    var Estado = colunas[14].ToString();
-                    var PontoReferencia = colunas[15].ToString();
-                    var FuncAtivo = (bool)colunas[16];
+                    var FuncAtivo = (bool)colunas[8];
+                    var IdFunc = colunas[9].ToString();
+                    var IdDados = colunas[10].ToString();
+                    var CEP = colunas[11].ToString();
+                    var Endereco = colunas[12].ToString();
+                    var Numero = colunas[13].ToString();
+                    var Complemento = colunas[14].ToString();
+                    var Bairro = colunas[15].ToString();
+                    var Cidade = colunas[16].ToString();
+                    var Estado = colunas[17].ToString();
+                    var PontoReferencia = colunas[18].ToString();
+                    
 
-                    var funcionario = new FuncionarioDto(Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia, FuncAtivo);
+                    var funcionario = new FuncionarioDto(Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, FuncAtivo, IdFunc, IdDados, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia);
                     funcionarios.Add(funcionario);
                 }
 
@@ -186,7 +217,7 @@ namespace Funcionarios.Models.Contexts
 
                 var command = new SqlCommand(query, _connection);
                 command.Parameters.Add("@Id", SqlDbType.VarChar).Value = id;
-
+                command.Parameters.Add("@IdDados", SqlDbType.VarChar).Value = id;
                 var dataset = new DataSet();
                 var adapter = new SqlDataAdapter(command);
                 adapter.Fill(dataset);
@@ -205,17 +236,21 @@ namespace Funcionarios.Models.Contexts
                     var TituloEleitor = colunas[5].ToString();
                     var CNH = colunas[6].ToString();
                     var Gestor = (bool)colunas[7];
-                    var CEP = colunas[8].ToString();
-                    var Endereco = colunas[9].ToString();
-                    var Numero = colunas[10].ToString();
-                    var Complemento = colunas[11].ToString();
-                    var Bairro = colunas[12].ToString();
-                    var Cidade = colunas[13].ToString();
-                    var Estado = colunas[14].ToString();
-                    var PontoReferencia = colunas[15].ToString();
-                    var FuncAtivo = (bool)colunas[16];
+                    //bool ehChefe = string.IsNullOrEmpty(Gestor) || Gestor == 0 ? false : true ;
+                    bool FuncAtivo = (bool)colunas[8];
+                    var IdFunc2 = colunas[9].ToString();
+                    var IdDados = colunas[10].ToString();
+                    var CEP = colunas[11].ToString();
+                    var Endereco = colunas[12].ToString();
+                    var Numero = colunas[13].ToString();
+                    var Complemento = colunas[14].ToString();
+                    var Bairro = colunas[15].ToString();
+                    var Cidade = colunas[16].ToString();
+                    var Estado = colunas[17].ToString();
+                    var PontoReferencia = colunas[18].ToString();
 
-                    funcionario = new FuncionarioDto(Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia, FuncAtivo);
+
+                    funcionario = new FuncionarioDto(Id, Nome, CPF, RG, OrgaoEmissor, TituloEleitor, CNH, Gestor, FuncAtivo, IdFunc2, IdDados, CEP, Endereco, Numero, Complemento, Bairro, Cidade, Estado, PontoReferencia);
                     
                 }
 

@@ -41,9 +41,9 @@ namespace Funcionarios.Models.Repositories
             return _contextData.PesquisarFuncionarioPorId(id);
         }
        
-        public void Excluir(string id)
+        public void Excluir(FuncionarioDto funcionario)
         {
-            _contextData.ExcluirFuncionario(id);
+            _contextData.ExcluirFuncionario(funcionario);
         }
     }
 }

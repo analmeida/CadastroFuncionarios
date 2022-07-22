@@ -9,6 +9,6 @@ namespace Funcionarios.Models.Contracts.Services
         List<FuncionarioDto> Listar();
         FuncionarioDto PesquisarId(string id);
         void Atualizar(FuncionarioDto funcionario);
-        void Excluir(string id);
+        void Excluir(FuncionarioDto funcionario);
     }
 }

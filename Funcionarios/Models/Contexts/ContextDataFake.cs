@@ -61,12 +61,13 @@ namespace Funcionarios.Models.Contexts
             }
         }
 
-        public void ExcluirFuncionario(string id)
+        public void ExcluirFuncionario(FuncionarioDto funcionario)
         {
             try
             {
-                var objPesquisa = PesquisarFuncionarioPorId(id);
+                var objPesquisa = PesquisarFuncionarioPorId(funcionario.Id);
                 funcionarios.Remove(objPesquisa);
+
             }
             catch (Exception ex)
             {
@@ -102,19 +103,19 @@ namespace Funcionarios.Models.Contexts
 
         private void InitializeData()
         {
-            var funcionario = new FuncionarioDto("José Luiz Silva", "01325476980", "07/05/1989", "SSP", "0923747234", "0213987219387", true, "01672131", "Rua dos Alpes", "24", "N/A", "Parque do Carmo", "São Bernardo", "São Paulo", "Subway", true);
+            var funcionario = new FuncionarioDto("José Luiz Silva", "01325476980", "07/05/1989", "SSP", "0923747234", "0213987219387", true, true, "01672131", "Rua dos Alpes", "24", "N/A", "Parque do Carmo", "São Bernardo", "São Paulo", "Subway");
             funcionarios.Add(funcionario);
 
-            funcionario = new FuncionarioDto("José Luiz Silva e Silva", "01325006980", "07/09/1985", "SSP", "0823120034", "0678237219387", false, "01672131", "Rua dos Ipês", "59", "N/A", "Parque do Carmo", "São Bento", "Minas Gerais", "Praça", true);
+            funcionario = new FuncionarioDto("José Luiz Silva e Silva", "01325006980", "07/09/1985", "SSP", "0823120034", "0678237219387", false, true, "01672131", "Rua dos Ipês", "59", "N/A", "Parque do Carmo", "São Bento", "Minas Gerais", "Praça");
             funcionarios.Add(funcionario);
 
-            funcionario = new FuncionarioDto("José Luiz Silva Sauro", "01369086980", "20/04/1989", "SSP", "0955555534", "0213983333387", true, "01655431", "Rua dos Asteróides", "339", "N/A", "Parque Village", "Jordanópolis", "São Paulo", "Metrô", true);
+            funcionario = new FuncionarioDto("José Luiz Silva Sauro", "01369086980", "20/04/1989", "SSP", "0955555534", "0213983333387", true, true, "01655431", "Rua dos Asteróides", "339", "N/A", "Parque Village", "Jordanópolis", "São Paulo", "Metrô");
             funcionarios.Add(funcionario);
 
-            funcionario = new FuncionarioDto("Maria Justina", "44325476111", "11/04/1963", "SSP", "0923747234", "021355559387", false, "09972131", "Rua dos Esquilos", "678", "N/A", "Vila Triunfo", "Mauá", "São Paulo", "Parquinho", true);
+            funcionario = new FuncionarioDto("Maria Justina", "44325476111", "11/04/1963", "SSP", "0923747234", "021355559387", false, true, "09972131", "Rua dos Esquilos", "678", "N/A", "Vila Triunfo", "Mauá", "São Paulo", "Parquinho");
             funcionarios.Add(funcionario);
 
-            funcionario = new FuncionarioDto("Francisca Silva", "20325476653", "18/05/1975", "SSP", "3333747234", "0213987219387", true, "01545131", "Rua dos Arbustos", "1584", "N/A", "Parque do Carmo", "São Bento", "São Bernardo", "Escola", true);
+            funcionario = new FuncionarioDto("Francisca Silva", "20325476653", "18/05/1975", "SSP", "3333747234", "0213987219387", true, true, "01545131", "Rua dos Arbustos", "1584", "N/A", "Parque do Carmo", "São Bento", "São Bernardo", "Escola");
             funcionarios.Add(funcionario);
 
 

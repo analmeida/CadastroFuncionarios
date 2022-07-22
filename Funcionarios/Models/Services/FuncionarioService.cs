@@ -68,11 +68,11 @@ namespace Funcionarios.Models.Services
             }
         }
 
-        public void Excluir(string id)
+        public void Excluir(FuncionarioDto funcionario)
         {
             try
             {
-                _funcionarioRepository.Excluir(id);
+                _funcionarioRepository.Excluir(funcionario);
             }
             catch (Exception ex)
             {
