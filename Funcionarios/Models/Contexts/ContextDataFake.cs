@@ -61,12 +61,14 @@ namespace Funcionarios.Models.Contexts
             }
         }
 
-        public void ExcluirFuncionario(FuncionarioDto funcionario)
+        public void ExcluirFuncionario(string IdFunc, string id)
         {
             try
             {
-                var objPesquisa = PesquisarFuncionarioPorId(funcionario.Id);
+                var objPesquisa = PesquisarFuncionarioPorId(IdFunc);
                 funcionarios.Remove(objPesquisa);
+                var objPesquisa1 = PesquisarFuncionarioPorId(id);
+                funcionarios.Remove(objPesquisa1);
 
             }
             catch (Exception ex)

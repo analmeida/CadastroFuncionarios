@@ -121,14 +121,14 @@ namespace Funcionarios.Models.Contexts
             }
         }
 
-        public void ExcluirFuncionario(FuncionarioDto funcionario)
+        public void ExcluirFuncionario(string IdFunc, string id)
         {
             try
             {
                 _connection.Open();
                 var query = SqlManager.GetSql(TSql.EXCLUIR_ENDERECO);
                 var command = new SqlCommand(query, _connection);
-                command.Parameters.Add("@IdFunc", System.Data.SqlDbType.VarChar).Value = funcionario.IdFunc;
+                command.Parameters.Add("@IdFunc", System.Data.SqlDbType.VarChar).Value = IdFunc;
                 command.ExecuteNonQuery();
                     if (_connection.State == ConnectionState.Open)
                         _connection.Close();
@@ -136,7 +136,7 @@ namespace Funcionarios.Models.Contexts
                 _connection.Open();
                 var query1 = SqlManager.GetSql(TSql.EXCLUIR_FUNCIONARIO);
                 var command1 = new SqlCommand(query1, _connection);
-                command1.Parameters.Add("@Id", System.Data.SqlDbType.VarChar).Value = funcionario.Id;
+                command1.Parameters.Add("@Id", System.Data.SqlDbType.VarChar).Value = id;
                 command1.ExecuteNonQuery();
 
 

@@ -108,10 +108,9 @@ namespace Funcionarios.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete([Bind("Id, IdFunc")] FuncionarioDto funcionario)
-        {            
-                if(funcionario.Gestor == null || funcionario.Gestor == true || funcionario.Gestor == false?  false:true)
-                _funcionarioService.Excluir(funcionario);
+        public IActionResult Delete([Bind("Id, IdFunc")] string IdFunc, string id)
+        {        
+                _funcionarioService.Excluir(IdFunc, id);
                 return RedirectToAction("List");            
 
         }
